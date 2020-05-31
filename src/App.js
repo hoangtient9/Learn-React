@@ -40,7 +40,7 @@ class App extends Component {
 
   render() {
     const StyleButton = styled.button`
-      background-color: green;
+      background-color: ${props => props.alt ? 'red' : 'green'};
       color: white;
       border: 1px solid blue;
       padding: 8px;
@@ -48,7 +48,7 @@ class App extends Component {
       font: inherit;
 
       &:hover {
-        background-color: lightgreen;
+        background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
         color: black;
     `;
 
@@ -83,7 +83,7 @@ class App extends Component {
         <div className="App">
           <h1>Hi Tien</h1>
           <p className={classes.join(' ')}>This is really working!</p>
-          <StyleButton onClick={this.tooglePersonsHandler}>Toogle Button</StyleButton>
+          <StyleButton alt={this.state.showPersons} onClick={this.tooglePersonsHandler}>Toogle Button</StyleButton>
           {persons}
         </div>
       // React.createElement('div', {className: 'App'}, null, React.createElement('h1', null, 'Hi, I\'m Tien'))
