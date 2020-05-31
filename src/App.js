@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium, {StyleRoot} from 'radium';
+import styled from 'styled-components';
 
 class App extends Component {
 
@@ -39,18 +39,18 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      font: 'inherit',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black',
-      },
-    }
+    const StyleButton = styled.button`
+      background-color: green;
+      color: white;
+      border: 1px solid blue;
+      padding: 8px;
+      cursor: pointer;
+      font: inherit;
+
+      &:hover {
+        background-color: lightgreen;
+        color: black;
+    `;
 
     let persons = null;
     if (this.state.showPersons) {
@@ -64,11 +64,11 @@ class App extends Component {
         </div>
       )
 
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black',
-      }
+      // style.backgroundColor = 'red';
+      // style[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black',
+      // }
     }
 
     const classes = [];
@@ -80,17 +80,15 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
         <div className="App">
           <h1>Hi Tien</h1>
           <p className={classes.join(' ')}>This is really working!</p>
-          <button style={style} onClick={this.tooglePersonsHandler}>Toogle Button</button>
+          <StyleButton onClick={this.tooglePersonsHandler}>Toogle Button</StyleButton>
           {persons}
         </div>
-      </StyleRoot>
       // React.createElement('div', {className: 'App'}, null, React.createElement('h1', null, 'Hi, I\'m Tien'))
     );
   }
 }
 
-export default Radium(App);
+export default App;
