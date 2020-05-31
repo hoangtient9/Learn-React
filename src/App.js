@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
-import styled from 'styled-components';
 
 class App extends Component {
 
@@ -39,19 +38,7 @@ class App extends Component {
   }
 
   render() {
-    const StyleButton = styled.button`
-      background-color: ${props => props.alt ? 'red' : 'green'};
-      color: white;
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-      font: inherit;
-
-      &:hover {
-        background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-        color: black;
-    `;
-
+    let btnClass = '';
     let persons = null;
     if (this.state.showPersons) {
       persons = ( 
@@ -64,28 +51,24 @@ class App extends Component {
         </div>
       )
 
-      // style.backgroundColor = 'red';
-      // style[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black',
-      // }
+      btnClass = classes.Red;
     }
 
-    const classes = [];
+    const assignedClass = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red')
+      assignedClass.push(classes.red)
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold')
+      assignedClass.push(classes.bold)
     }
 
     return (
-        <div className="App">
-          <h1>Hi Tien</h1>
-          <p className={classes.join(' ')}>This is really working!</p>
-          <StyleButton alt={this.state.showPersons} onClick={this.tooglePersonsHandler}>Toogle Button</StyleButton>
-          {persons}
-        </div>
+      <div className={classes.App}>
+        <h1>Hi Tien</h1>
+        <p className={assignedClass.join(' ')}>This is really working!</p>
+        <button className={btnClass} onClick={this.tooglePersonsHandler}>Toogle Button</button>
+        {persons}
+      </div>
       // React.createElement('div', {className: 'App'}, null, React.createElement('h1', null, 'Hi, I\'m Tien'))
     );
   }
