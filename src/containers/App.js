@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from './hoc/WithClass';
+import withClass from './hoc/withClass';
+import Aux from './hoc/Auxiliary'
 
 class App extends Component {
   constructor(props) {
@@ -11,13 +12,14 @@ class App extends Component {
   }
   state = {
     persons: [
-      {id: '1', name: 'Tien', age: 22},
+      {id: '1', name: 'Tien', age: '22'},
       {id: '2', name: 'Luis', age: 30},
       {id: '3', name: 'Max', age: 25}
     ],
     otherState: 'some other value',
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -50,7 +52,12 @@ class App extends Component {
 
     const persons = [...this.state.persons];
     persons[personIndex] = person
-    this.setState({persons: persons})
+    this.setState((preState, props) => {
+      return {
+        persons: persons,
+        changeCounter: preState.changeCounter + 1
+      }
+    })
   }
 
   tooglePersonsHandler = () => {
@@ -77,13 +84,13 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={classes.App}>
+      <Aux>
         <button onClick={() => this.setState({showCockpit: false})}>remove Cockpit</button>
         {this.state.showCockpit && <Cockpit clicked={this.tooglePersonsHandler} showPersons={this.state.showPersons} personsLength={this.state.persons.length} title={this.props.title} />}
         {persons}
-      </WithClass>
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);

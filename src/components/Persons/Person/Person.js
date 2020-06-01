@@ -1,8 +1,11 @@
 import React, {Component} from "react";
+import PropTypes from 'prop-types';
 import classes from './Person.css';
-import Aux from '../../../containers/hoc/Auxiliary'
+import withClass from '../../../containers/hoc/withClass';
+import Aux from '../../../containers/hoc/Auxiliary';
 
-class person extends Component {
+
+class Person extends Component {
   shouldComponentUpdate(nextprops, nextState) {
     console.log(`[Person.js]  shouldComponentUpdate`)
     return true;
@@ -31,4 +34,11 @@ class person extends Component {
   }
 };
 
-export default person;
+Person.propTypes = {
+  click: PropTypes.func,
+  change: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number
+}
+
+export default withClass(Person, classes.Person);
