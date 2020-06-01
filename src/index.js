@@ -5,9 +5,9 @@ import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App title='Persons Manager'/>
-  </React.StrictMode>,
+  // <React.StrictMode>
+    <App title='Persons Manager'/>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 
