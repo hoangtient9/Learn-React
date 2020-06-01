@@ -6,6 +6,14 @@ import Aux from '../../../containers/hoc/Auxiliary';
 
 
 class Person extends Component {
+  constructor(props) {
+    super(props);
+    this.inputElementRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.inputElementRef.current.focus();
+  }
   shouldComponentUpdate(nextprops, nextState) {
     console.log(`[Person.js]  shouldComponentUpdate`)
     return true;
@@ -28,7 +36,7 @@ class Person extends Component {
           I am a {this.props.name}, I am {this.props.age} old!
         </p>
         <p>{this.props.children}</p>
-        <input type='text' onChange={this.props.change} value={this.props.name}></input>
+        <input type='text' onChange={this.props.change} value={this.props.name} ref={this.inputElementRef}></input>
       </Aux>
     )
   }

@@ -1,9 +1,13 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import classes from './Cockpit.css';
 
 const Cockpit = (props) => {
+
+  const toogleBtnRef = useRef(null);
+
   useEffect(() => {
     console.log(`[Cockpit.js] useEffect`)
+    toogleBtnRef.current.click()
     return () => {
       console.log(`[Cockpit.js] will unmount`)
     }
@@ -35,7 +39,7 @@ const Cockpit = (props) => {
     <div className={classes.Cockpit}>
       <h1>{props.title}</h1>
       <p className={assignedClass.join(' ')}>This is really working!</p>
-      <button className={btnClass} onClick={props.clicked}>Toogle Button</button>
+      <button className={btnClass} onClick={props.clicked} ref={toogleBtnRef} >Toogle Button</button>
     </div>
   );
 };
